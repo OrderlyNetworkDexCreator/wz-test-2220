@@ -32,7 +32,7 @@ window.__RUNTIME_CONFIG__ = {
   "VITE_SEO_THEME_COLOR": "#000000",
   "VITE_SEO_KEYWORDS": "",
   "VITE_AVAILABLE_LANGUAGES": "en,zh,ja,es,ko,vi,de,fr,ru,id,tr,it,pt,uk,pl,nl",
-  "VITE_USE_CUSTOM_PNL_POSTERS": "false",
-  "VITE_CUSTOM_PNL_POSTER_COUNT": "0",
+  "VITE_USE_CUSTOM_PNL_POSTERS": "true",
+  "VITE_CUSTOM_PNL_POSTER_COUNT": "1",
   "VITE_TRADING_VIEW_COLOR_CONFIG": ""
 };
