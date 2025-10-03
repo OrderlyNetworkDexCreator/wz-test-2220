@@ -51,7 +51,10 @@ jobs:
       - name: Check if only config changed
         id: check-changes
         run: |
-          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -v "^public/config\.js$"; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "needs_build=true" >> $GITHUB_OUTPUT
+            echo "Manual trigger detected - forcing full build"
+          elif git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -v "^public/config\.js$"; then
             echo "needs_build=true" >> $GITHUB_OUTPUT
           else
             echo "needs_build=false" >> $GITHUB_OUTPUT

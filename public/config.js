@@ -1,7 +1,7 @@
 window.__RUNTIME_CONFIG__ = {
   "VITE_ORDERLY_BROKER_ID": "demo",
   "VITE_ORDERLY_BROKER_NAME": "Wuzhong test",
-  "VITE_DISABLE_MAINNET": "false",
+  "VITE_DISABLE_MAINNET": "true",
   "VITE_DISABLE_TESTNET": "false",
   "VITE_ORDERLY_MAINNET_CHAINS": "42161,10,8453,1,56,900900900",
   "VITE_ORDERLY_TESTNET_CHAINS": "421614,84532,97,901901901,11124",
@@ -17,7 +17,7 @@ window.__RUNTIME_CONFIG__ = {
   "VITE_APP_DESCRIPTION": "Orderly Trading Application",
   "VITE_HAS_PRIMARY_LOGO": "false",
   "VITE_HAS_SECONDARY_LOGO": "false",
-  "VITE_ENABLED_MENUS": "Trading,Portfolio,Rewards,Markets,Leaderboard",
+  "VITE_ENABLED_MENUS": "Trading,Portfolio,Rewards,Markets,Leaderboard,Vaults",
   "VITE_CUSTOM_MENUS": "",
   "VITE_ENABLE_CAMPAIGNS": "false",
   "VITE_TELEGRAM_URL": "",
