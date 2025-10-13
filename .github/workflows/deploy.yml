@@ -77,13 +77,20 @@ jobs:
           git remote add upstream https://github.com/OrderlyNetworkDexCreator/dex-creator-template.git || true
           git fetch upstream
           
-          # Try to merge upstream/main
+          BEFORE_MERGE=$(git rev-parse HEAD)
+          
           if git merge upstream/main --no-edit; then
-            echo "Successfully merged upstream changes"
-            echo "sync_happened=true" >> $GITHUB_OUTPUT
-            git push origin main
+            AFTER_MERGE=$(git rev-parse HEAD)
+            
+            if [ "$BEFORE_MERGE" != "$AFTER_MERGE" ]; then
+              echo "Successfully merged upstream changes"
+              echo "sync_happened=true" >> $GITHUB_OUTPUT
+              git push origin main
+            else
+              echo "Already up to date with upstream"
+            fi
           else
-            echo "Merge failed or no changes to merge"
+            echo "Merge failed"
             git merge --abort 2>/dev/null || true
           fi
 
