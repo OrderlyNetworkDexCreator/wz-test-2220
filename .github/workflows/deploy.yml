@@ -16,11 +16,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  check-prerequisites:
     runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.check_merge.outputs.result }}
     steps:
       - name: Check if triggered by merge commit
         id: check_merge
@@ -28,7 +27,7 @@ jobs:
         with:
           script: |
             if (context.eventName !== 'push') {
-              return false;
+              return 'false';
             }
             const commit = await github.rest.repos.getCommit({
               owner: context.repo.owner,
@@ -38,15 +37,18 @@ jobs:
             const isMerge = commit.data.parents.length > 1;
             if (isMerge) {
               console.log('Triggered by merge commit, skipping workflow to prevent loop');
+              return 'true';
             }
-            return isMerge;
+            return 'false';
 
-      - name: Exit if merge commit
-        if: steps.check_merge.outputs.result == 'true'
-        run: |
-          echo "Workflow triggered by merge commit from upstream sync, exiting to prevent loop"
-          exit 0
-
+  build-and-deploy:
+    needs: check-prerequisites
+    if: needs.check-prerequisites.outputs.should_skip != 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Check if fork
         id: check_fork
         uses: actions/github-script@v7
