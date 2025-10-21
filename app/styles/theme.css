@@ -1,18 +1,19 @@
 :root {
   --oui-font-family: 'Manrope', sans-serif;
+  --oui-font-size-base: 16px;
 
   /* colors */
-  --oui-color-primary: 96 169 164;
-  --oui-color-primary-light: 144 202 198;
-  --oui-color-primary-darken: 64 137 132;
-  --oui-color-primary-contrast: 255 255 255;
+  --oui-color-primary: 2 3 3;
+  --oui-color-primary-light: 0 0 0;
+  --oui-color-primary-darken: 0 0 0;
+  --oui-color-primary-contrast: 0 0 0;
 
-  --oui-color-link: 121 158 155;
-  --oui-color-link-light: 173 204 198;
+  --oui-color-link: 0 0 0;
+  --oui-color-link-light: 5 11 10;
 
-  --oui-color-secondary: 255 255 255;
-  --oui-color-tertiary: 218 218 218;
-  --oui-color-quaternary: 218 218 218;
+  --oui-color-secondary: 60 21 21;
+  --oui-color-tertiary: 50 16 16;
+  --oui-color-quaternary: 24 12 12;
 
   --oui-color-danger: 237 91 134;
   --oui-color-danger-light: 250 154 173;
@@ -93,6 +94,7 @@
   --oui-spacing-xl: 33.75rem;
 }
 
-.oui-scaffold-footer-powered-by {
-  display: none;
+html, body {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 16px !important;
 }
