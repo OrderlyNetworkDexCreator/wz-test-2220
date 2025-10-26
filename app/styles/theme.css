@@ -98,3 +98,8 @@ html, body {
   font-family: 'Manrope', sans-serif !important;
   font-size: 16px !important;
 }
+
+
+#root>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-box.oui-scaffold-topNavbar.oui-bg-base-9>header>div .oui-text-base-contrast-36 {
+  color: rgb(var(--oui-color-base-foreground) / 1) !important;
+}
