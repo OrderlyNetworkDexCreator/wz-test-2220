@@ -2,7 +2,7 @@ import { ReactNode, useCallback, lazy, Suspense } from "react";
 import { OrderlyAppProvider } from "@orderly.network/react-app";
 import { useOrderlyConfig } from "@/utils/config";
 import type { NetworkId } from "@orderly.network/types";
-import { LocaleProvider, LocaleCode, LocaleEnum, defaultLanguages } from "@orderly.network/i18n";
+import { LocaleProvider, LocaleCode, LocaleEnum, defaultLanguages, Resources } from "@orderly.network/i18n";
 import { withBasePath } from "@/utils/base-path";
 import { getSEOConfig, getUserLanguage } from "@/utils/seo";
 import { getRuntimeConfigBoolean, getRuntimeConfigArray, getRuntimeConfig } from "@/utils/runtime-config";
@@ -15,18 +15,18 @@ const NETWORK_ID_KEY = "orderly_network_id";
 
 const getNetworkId = (): NetworkId => {
 	if (typeof window === "undefined") return "mainnet";
-	
+
 	const disableMainnet = getRuntimeConfigBoolean('VITE_DISABLE_MAINNET');
 	const disableTestnet = getRuntimeConfigBoolean('VITE_DISABLE_TESTNET');
-	
+
 	if (disableMainnet && !disableTestnet) {
 		return "testnet";
 	}
-	
+
 	if (disableTestnet && !disableMainnet) {
 		return "mainnet";
 	}
-	
+
 	return (localStorage.getItem(NETWORK_ID_KEY) as NetworkId) || "mainnet";
 };
 
@@ -38,7 +38,7 @@ const setNetworkId = (networkId: NetworkId) => {
 
 const getAvailableLanguages = (): string[] => {
 	const languages = getRuntimeConfigArray('VITE_AVAILABLE_LANGUAGES');
-	
+
 	return languages.length > 0 ? languages : ['en'];
 };
 
@@ -46,7 +46,7 @@ const getDefaultLanguage = (): LocaleCode => {
 	const seoConfig = getSEOConfig();
 	const userLanguage = getUserLanguage();
 	const availableLanguages = getAvailableLanguages();
-	
+
 	if (typeof window !== 'undefined') {
 		const urlParams = new URLSearchParams(window.location.search);
 		const langParam = urlParams.get('lang');
@@ -54,30 +54,114 @@ const getDefaultLanguage = (): LocaleCode => {
 			return langParam as LocaleCode;
 		}
 	}
-	
+
 	if (seoConfig.language && availableLanguages.includes(seoConfig.language)) {
 		return seoConfig.language as LocaleCode;
 	}
-	
+
 	if (availableLanguages.includes(userLanguage)) {
 		return userLanguage as LocaleCode;
 	}
-	
+
 	return (availableLanguages[0] || 'en') as LocaleCode;
 };
 
 const PrivyConnector = lazy(() => import("@/components/orderlyProvider/privyConnector"));
 const WalletConnector = lazy(() => import("@/components/orderlyProvider/walletConnector"));
 
+const LocaleProviderWithLanguages = lazy(async () => {
+	const languageCodes = getAvailableLanguages() || ["en"];
+	console.log("Available languages from env:", languageCodes);
+
+	const languagePromises = languageCodes.map(async (code: string) => {
+		console.log("Loading language:", code);
+		const trimmedCode = code.trim();
+		try {
+			// Load main language file
+			const mainResponse = await fetch(
+				`${import.meta.env.VITE_BASE_URL ?? ""}/locales/${trimmedCode}.json?v=44399b2a`
+			);
+			if (!mainResponse.ok) {
+				throw new Error(
+					`Failed to fetch ${trimmedCode}.json: ${mainResponse.status}`
+				);
+			}
+			const mainData = await mainResponse.json();
+
+			// Load extended language file
+			let extendedData = {};
+			try {
+				const extendedResponse = await fetch(
+					`${import.meta.env.VITE_BASE_URL ?? ""
+					}/locales/extend/${trimmedCode}.json?v=44399b2a`
+				);
+				if (extendedResponse.ok) {
+					extendedData = await extendedResponse.json();
+				}
+			} catch (extendedError) {
+				console.warn(
+					`Extended language file not found for ${trimmedCode}`,
+					extendedError
+				);
+			}
+
+			// Merge main data with extended data (extended data takes precedence)
+			const mergedData = { ...mainData, ...extendedData };
+
+			return { code: trimmedCode, data: mergedData };
+		} catch (error) {
+			console.error(`Failed to load language: ${trimmedCode}`, error);
+			return null;
+		}
+	});
+
+	const results = await Promise.all(languagePromises);
+	console.log("Loaded language resources:", results);
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const resources: Resources<any> = {};
+	results.forEach((result) => {
+		if (result) {
+			resources[result.code] = result.data;
+		}
+	});
+
+	// Patch defaultLanguages to replace displayName for zh to Hebrew
+	const languagesWithHebrew = defaultLanguages.map(lang =>
+		lang.localCode === 'zh' ? { ...lang, displayName: 'עברית' } : lang
+	);
+
+	const languages = languagesWithHebrew.filter((lang) =>
+		languageCodes.some((code: string) => code.trim() === lang.localCode)
+	);
+	console.log("Filtered languages for LocaleProvider:", languages);
+
+	return {
+		default: ({ children }: { children: ReactNode }) => (
+			<LocaleProvider resources={resources} languages={languages}>
+				{children}
+			</LocaleProvider>
+		),
+	};
+});
+
+import { useEffect } from "react";
+
+const setDocumentDirection = (lang: string) => {
+	if (typeof document !== 'undefined') {
+		document.documentElement.dir = lang === 'zh' ? 'rtl' : 'ltr';
+	}
+};
+
 const OrderlyProvider = (props: { children: ReactNode }) => {
 	const config = useOrderlyConfig();
 	const networkId = getNetworkId();
-  // const { isRestricted } = useIpRestriction();
-	
+	// const { isRestricted } = useIpRestriction();
+
 	const privyAppId = getRuntimeConfig('VITE_PRIVY_APP_ID');
 	const usePrivy = !!privyAppId;
 
-	const parseChainIds = (envVar: string | undefined): Array<{id: number}> | undefined => {
+	const parseChainIds = (envVar: string | undefined): Array<{ id: number }> | undefined => {
 		if (!envVar) return undefined;
 		return envVar.split(',')
 			.map(id => id.trim())
@@ -88,7 +172,7 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 
 	const parseDefaultChain = (envVar: string | undefined): { mainnet: { id: number } } | undefined => {
 		if (!envVar) return undefined;
-		
+
 		const chainId = parseInt(envVar.trim(), 10);
 		return !isNaN(chainId) ? { mainnet: { id: chainId } } : undefined;
 	};
@@ -106,12 +190,12 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 	const defaultChain = parseDefaultChain(getRuntimeConfig('VITE_DEFAULT_CHAIN'));
 
 	const onChainChanged = useCallback(
-		(_chainId: number, {isTestnet}: {isTestnet: boolean}) => {
+		(_chainId: number, { isTestnet }: { isTestnet: boolean }) => {
 			const currentNetworkId = getNetworkId();
 			if ((isTestnet && currentNetworkId === 'mainnet') || (!isTestnet && currentNetworkId === 'testnet')) {
 				const newNetworkId: NetworkId = isTestnet ? 'testnet' : 'mainnet';
 				setNetworkId(newNetworkId);
-				
+
 				setTimeout(() => {
 					window.location.reload();
 				}, 100);
@@ -134,11 +218,11 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 
 	const loadPath = (lang: LocaleCode) => {
 		const availableLanguages = getAvailableLanguages();
-		
+
 		if (!availableLanguages.includes(lang)) {
 			return [];
 		}
-		
+
 		if (lang === LocaleEnum.en) {
 			return withBasePath(`/locales/extend/${lang}.json`);
 		}
@@ -148,23 +232,27 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 		];
 	};
 
-	const defaultLanguage = getDefaultLanguage();
-	
+		const defaultLanguage = getDefaultLanguage();
+
+		useEffect(() => {
+			setDocumentDirection(defaultLanguage);
+		}, [defaultLanguage]);
+
 	const availableLanguages = getAvailableLanguages();
-	const filteredLanguages = defaultLanguages.filter(lang => 
+	const filteredLanguages = defaultLanguages.filter(lang =>
 		availableLanguages.includes(lang.localCode)
 	);
 
-  // if (isRestricted) {
-  //   return (
-  //     <>
-  //       <ServiceDisclaimerDialog isRestricted={isRestricted} />
-  //       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#101014', color: '#fff', fontSize: '2rem', fontWeight: 'bold' }}>
-  //         Service not available in your region.
-  //       </div>
-  //     </>
-  //   );
-  // }
+	// if (isRestricted) {
+	//   return (
+	//     <>
+	//       <ServiceDisclaimerDialog isRestricted={isRestricted} />
+	//       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#101014', color: '#fff', fontSize: '2rem', fontWeight: 'bold' }}>
+	//         Service not available in your region.
+	//       </div>
+	//     </>
+	//   );
+	// }
 
 	const appProvider = (
 		<OrderlyAppProvider
@@ -178,7 +266,7 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 			defaultChain={defaultChain}
 		>
 			<DemoGraduationChecker />
-      <ServiceDisclaimerDialog isRestricted={false} />
+			<ServiceDisclaimerDialog isRestricted={false} />
 			{props.children}
 		</OrderlyAppProvider>
 	);
@@ -188,16 +276,11 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 		: <WalletConnector networkId={networkId}>{appProvider}</WalletConnector>;
 
 	return (
-		<LocaleProvider
-			onLanguageChanged={onLanguageChanged}
-			backend={{ loadPath }}
-			locale={defaultLanguage}
-			languages={filteredLanguages}
-		>
+		<LocaleProviderWithLanguages>
 			<Suspense fallback={<LoadingSpinner />}>
 				{walletConnector}
 			</Suspense>
-		</LocaleProvider>
+		</LocaleProviderWithLanguages>
 	);
 };
 
