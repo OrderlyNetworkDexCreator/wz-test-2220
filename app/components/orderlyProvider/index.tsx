@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, lazy, Suspense } from "react";
+import { ReactNode, useCallback, lazy, Suspense, useState } from "react";
 import { OrderlyAppProvider } from "@orderly.network/react-app";
 import { useOrderlyConfig } from "@/utils/config";
 import type { NetworkId } from "@orderly.network/types";
@@ -12,6 +12,7 @@ import ServiceDisclaimerDialog from "./ServiceRestrictionsDialog";
 // import { useIpRestriction } from "@/hooks/useIpRestriction";
 
 const NETWORK_ID_KEY = "orderly_network_id";
+
 
 const getNetworkId = (): NetworkId => {
 	if (typeof window === "undefined") return "mainnet";
@@ -119,39 +120,59 @@ const LocaleProviderWithLanguages = lazy(async () => {
 	console.log("Loaded language resources:", results);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const resources: Resources<any> = {};
+	const initialResources: Resources<any> = {};
 	results.forEach((result) => {
 		if (result) {
-			resources[result.code] = result.data;
+			initialResources[result.code] = result.data;
 		}
 	});
+	const resources_save = { ...initialResources };
 
 	// Patch defaultLanguages to replace displayName for zh to Hebrew
+	// Adding hebrew to defaultLanguages
 	const languagesWithHebrew = defaultLanguages.map(lang =>
 		lang.localCode === 'zh' ? { ...lang, displayName: 'עברית' } : lang
 	);
 
+	languagesWithHebrew.push({ localCode: 'he', displayName: 'עברית' });
 	const languages = languagesWithHebrew.filter((lang) =>
 		languageCodes.some((code: string) => code.trim() === lang.localCode)
 	);
 	console.log("Filtered languages for LocaleProvider:", languages);
 
 	return {
-		default: ({ children }: { children: ReactNode }) => (
-			<LocaleProvider resources={resources} languages={languages}>
-				{children}
-			</LocaleProvider>
-		),
+		default: ({ children }: { children: ReactNode }) => {
+			const [resources, setResources] = useState<Resources<any>>(initialResources);
+
+			const onLanguageChanged = async (lang: LocaleCode) => {
+				document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+
+				if (lang === 'he') {
+					// Load Hebrew data into en version
+					setResources(prev => ({
+						...prev,
+						en: resources_save.he || resources_save.en
+					}));
+				} else if (lang === 'en') {
+					// Load English data into en version
+					setResources(prev => ({
+						...prev,
+						en: resources_save.en
+					}));
+				}
+
+				console.log("Language changed to:", lang);
+			};
+
+			return (
+				<LocaleProvider resources={resources} languages={languages} onLanguageChanged={onLanguageChanged}>
+					{children}
+				</LocaleProvider>
+			);
+		},
 	};
 });
 
-import { useEffect } from "react";
-
-const setDocumentDirection = (lang: string) => {
-	if (typeof document !== 'undefined') {
-		document.documentElement.dir = lang === 'zh' ? 'rtl' : 'ltr';
-	}
-};
 
 const OrderlyProvider = (props: { children: ReactNode }) => {
 	const config = useOrderlyConfig();
@@ -204,18 +225,6 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 		[]
 	);
 
-	const onLanguageChanged = async (lang: LocaleCode) => {
-		if (typeof window !== 'undefined') {
-			const url = new URL(window.location.href);
-			if (lang === LocaleEnum.en) {
-				url.searchParams.delete('lang');
-			} else {
-				url.searchParams.set('lang', lang);
-			}
-			window.history.replaceState({}, '', url.toString());
-		}
-	};
-
 	const loadPath = (lang: LocaleCode) => {
 		const availableLanguages = getAvailableLanguages();
 
@@ -232,11 +241,7 @@ const OrderlyProvider = (props: { children: ReactNode }) => {
 		];
 	};
 
-		const defaultLanguage = getDefaultLanguage();
-
-		useEffect(() => {
-			setDocumentDirection(defaultLanguage);
-		}, [defaultLanguage]);
+	const defaultLanguage = getDefaultLanguage();
 
 	const availableLanguages = getAvailableLanguages();
 	const filteredLanguages = defaultLanguages.filter(lang =>
