@@ -142,30 +142,69 @@ const LocaleProviderWithLanguages = lazy(async () => {
 
 	return {
 		default: ({ children }: { children: ReactNode }) => {
-			const [resources, setResources] = useState<Resources<any>>(initialResources);
+			// Get language from URL on initial load
+			const getInitialLanguage = (): LocaleCode => {
+				if (typeof window !== 'undefined') {
+					const urlParams = new URLSearchParams(window.location.search);
+					const langParam = urlParams.get('lang');
+					if (langParam && (langParam === 'he' || langParam === 'en')) {
+						return langParam as LocaleCode;
+					}
+				}
+				return 'en';
+			};
+
+			const initialLanguage = getInitialLanguage();
+
+			// Prepare initial resources based on language from URL
+			const getInitialResources = (): Resources<any> => {
+				if (initialLanguage === 'he') {
+					return {
+						...resources_save,
+						en: resources_save.he || resources_save.en
+					};
+				}
+				return initialResources;
+			};
+
+			const [resources, setResources] = useState<Resources<any>>(getInitialResources());
+			const [currentLocale, setCurrentLocale] = useState<LocaleCode>('en');
+
+			// Set initial direction based on URL language
+			if (typeof document !== 'undefined') {
+				document.documentElement.dir = initialLanguage === 'he' ? 'rtl' : 'ltr';
+			}
 
 			const onLanguageChanged = async (lang: LocaleCode) => {
-				document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+				// Update URL parameters
+				if (typeof window !== 'undefined') {
+					const url = new URL(window.location.href);
+					if (lang === LocaleEnum.en) {
+						url.searchParams.delete('lang');
+					} else {
+						url.searchParams.set('lang', lang);
+					}
 
-				if (lang === 'he') {
-					// Load Hebrew data into en version
-					setResources(prev => ({
-						...prev,
-						en: resources_save.he || resources_save.en
-					}));
-				} else if (lang === 'en') {
-					// Load English data into en version
-					setResources(prev => ({
-						...prev,
-						en: resources_save.en
-					}));
+					// Set direction based on language
+					document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+
+					// Update URL and reload to apply language
+					window.history.replaceState({}, '', url.toString());
+
+					// Trigger a page refresh to apply the language properly
+					setTimeout(() => {
+						window.location.reload();
+					}, 100);
 				}
-
-				console.log("Language changed to:", lang);
 			};
 
 			return (
-				<LocaleProvider resources={resources} languages={languages} onLanguageChanged={onLanguageChanged}>
+				<LocaleProvider
+					resources={resources}
+					languages={languages}
+					onLanguageChanged={onLanguageChanged}
+					locale={currentLocale}
+				>
 					{children}
 				</LocaleProvider>
 			);

@@ -119,3 +119,52 @@ body {
 .oui-scaffold-footer-powered-by {
   display: none;
 }
+
+
+/* Disable all highlight/selected effects for language selection */
+/* Target all language buttons in dialogs - remove selection effects */
+[role="dialog"] button.oui-bg-base-5 {
+  background-color: transparent !important;
+}
+
+[role="dialog"] button span.oui-text-base-contrast-80 {
+  color: rgb(var(--oui-color-base-foreground) / 0.36) !important;
+}
+
+[role="dialog"] button div.oui-gradient-brand {
+  display: none !important;
+}
+
+/* Disable hover effects for language buttons */
+[role="dialog"] button.hover\:oui-bg-base-5:hover {
+  background-color: transparent !important;
+}
+
+[role="dialog"] button span.group-hover\:oui-text-base-contrast-80 {
+  color: rgb(var(--oui-color-base-foreground) / 0.36) !important;
+}
+
+[role="dialog"] button:hover span.group-hover\:oui-text-base-contrast-80 {
+  color: rgb(var(--oui-color-base-foreground) / 0.36) !important;
+}
+
+/* Also target by specific ID in case the above doesn't work */
+#radix-\:rn5\: button.oui-bg-base-5 {
+  background-color: transparent !important;
+}
+
+#radix-\:rn5\: button span.oui-text-base-contrast-80 {
+  color: rgb(var(--oui-color-base-foreground) / 0.36) !important;
+}
+
+#radix-\:rn5\: button div.oui-gradient-brand {
+  display: none !important;
+}
+
+#radix-\:rn5\: button:hover {
+  background-color: transparent !important;
+}
+
+#radix-\:rn5\: button:hover span {
+  color: rgb(var(--oui-color-base-foreground) / 0.36) !important;
+}
