@@ -12,7 +12,7 @@ export default function Index() {
 
   useEffect(() => {
     const searchParamsString = searchParams.toString();
-    const redirectPath = `/perp/${DEFAULT_SYMBOL}${searchParamsString ? `?${searchParamsString}` : ''}`;
+    const redirectPath = '/markets';
     navigate(redirectPath);
   }, [navigate, searchParams]);
 
