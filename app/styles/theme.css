@@ -2,93 +2,164 @@
   --oui-font-family: 'Manrope', sans-serif;
   --oui-font-size-base: 16px;
 
-  /* colors */
-  --oui-color-primary: 212 175 55;
-  /* rich gold */
-  --oui-color-primary-light: 242 210 92;
-  --oui-color-primary-darken: 161 129 32;
-  --oui-color-primary-contrast: 14 13 18;
+  /* ========================================
+     ELEGANT DEX THEME
+     Sophisticated navy & teal palette
+     ======================================== */
 
-  --oui-color-link: 212 175 55;
-  --oui-color-link-light: 242 210 92;
+  /* Primary: Elegant Teal/Cyan - trust, clarity, technology */
+  --oui-color-primary: 56 189 248;
+  /* sky-400 - elegant cyan */
+  --oui-color-primary-light: 125 211 252;
+  /* lighter cyan */
+  --oui-color-primary-darken: 14 165 233;
+  /* deeper cyan */
+  --oui-color-primary-contrast: 8 13 25;
+  /* deep navy contrast */
 
-  --oui-color-secondary: 24 24 32;
-  /* deep graphite navy */
-  --oui-color-tertiary: 35 35 45;
-  --oui-color-quaternary: 85 85 100;
+  --oui-color-link: 56 189 248;
+  --oui-color-link-light: 125 211 252;
 
-  --oui-color-danger: 207 70 91;
-  --oui-color-danger-light: 241 136 155;
-  --oui-color-danger-darken: 164 40 60;
+  /* Structural Colors: Deep navy & slate - sophisticated, elegant */
+  --oui-color-secondary: 15 23 42;
+  /* slate-900 - deep elegant navy */
+  --oui-color-tertiary: 30 41 59;
+  /* slate-800 */
+  --oui-color-quaternary: 71 85 105;
+  /* slate-600 */
+
+  /* Danger: Refined red - clear but not harsh */
+  --oui-color-danger: 239 68 68;
+  /* rose-500 */
+  --oui-color-danger-light: 251 113 133;
+  /* rose-400 */
+  --oui-color-danger-darken: 225 29 72;
+  /* rose-600 */
   --oui-color-danger-contrast: 255 255 255;
 
-  --oui-color-success: 50 168 110;
-  --oui-color-success-light: 86 204 153;
-  --oui-color-success-darken: 26 122 81;
+  /* Success: Elegant emerald - sophisticated green */
+  --oui-color-success: 16 185 129;
+  /* emerald-500 */
+  --oui-color-success-light: 52 211 153;
+  /* emerald-400 */
+  --oui-color-success-darken: 5 150 105;
+  /* emerald-600 */
   --oui-color-success-contrast: 255 255 255;
 
-  --oui-color-warning: 241 196 15;
-  --oui-color-warning-light: 255 222 89;
-  --oui-color-warning-darken: 190 151 10;
-  --oui-color-warning-contrast: 14 13 18;
+  /* Warning: Refined amber - elegant attention */
+  --oui-color-warning: 245 158 11;
+  /* amber-500 */
+  --oui-color-warning-light: 251 191 36;
+  /* amber-400 */
+  --oui-color-warning-darken: 217 119 6;
+  /* amber-600 */
+  --oui-color-warning-contrast: 8 13 25;
 
-  --oui-color-fill: 18 18 25;
-  --oui-color-fill-active: 26 26 36;
+  /* Fill: Deep navy tones */
+  --oui-color-fill: 8 13 25;
+  /* deepest navy */
+  --oui-color-fill-active: 15 23 42;
+  /* slate-900 */
 
-  --oui-color-base-1: 60 60 75;
-  --oui-color-base-2: 50 50 65;
-  --oui-color-base-3: 45 45 55;
-  --oui-color-base-4: 38 38 48;
-  --oui-color-base-5: 32 32 40;
-  --oui-color-base-6: 28 28 35;
-  --oui-color-base-7: 22 22 28;
-  --oui-color-base-8: 18 18 24;
-  --oui-color-base-9: 14 14 19;
-  --oui-color-base-10: 10 10 14;
+  /* Base Scale: Refined navy & slate gradient */
+  --oui-color-base-1: 100 116 139;
+  /* slate-500 - lightest */
+  --oui-color-base-2: 71 85 105;
+  /* slate-600 */
+  --oui-color-base-3: 51 65 85;
+  /* slate-700 */
+  --oui-color-base-4: 45 55 72;
+  /* custom slate */
+  --oui-color-base-5: 39 48 63;
+  /* custom slate */
+  --oui-color-base-6: 30 41 59;
+  /* slate-800 */
+  --oui-color-base-7: 24 34 51;
+  /* custom navy */
+  --oui-color-base-8: 18 27 43;
+  /* custom navy */
+  --oui-color-base-9: 15 23 42;
+  /* slate-900 */
+  --oui-color-base-10: 8 13 25;
+  /* deepest navy */
 
-  --oui-color-base-foreground: 255 255 255;
-  --oui-color-line: 120 120 140;
+  /* Foreground: Soft white (easier on eyes) */
+  --oui-color-base-foreground: 248 250 252;
+  /* slate-50 - soft white */
+  --oui-color-line: 71 85 105;
+  /* slate-600 - subtle lines */
 
-  --oui-color-trading-loss: 207 70 91;
+  /* Trading Colors: Clear distinction */
+  --oui-color-trading-loss: 239 68 68;
+  /* rose-500 - sell/loss */
   --oui-color-trading-loss-contrast: 255 255 255;
-  --oui-color-trading-profit: 50 168 110;
+  --oui-color-trading-profit: 16 185 129;
+  /* emerald-500 - buy/profit */
   --oui-color-trading-profit-contrast: 255 255 255;
 
-  /* gradients */
-  --oui-gradient-primary-start: 64 137 132;
-  --oui-gradient-primary-end: 144 202 198;
+  /* ========================================
+     ELEGANT GRADIENTS
+     ======================================== */
 
-  --oui-gradient-secondary-start: 81 42 121;
-  --oui-gradient-secondary-end: 176 132 233;
+  /* Primary Gradient: Elegant teal flow */
+  --oui-gradient-primary-start: 14 165 233;
+  /* sky-500 */
+  --oui-gradient-primary-end: 56 189 248;
+  /* sky-400 */
 
-  --oui-gradient-success-start: 1 83 68;
-  --oui-gradient-success-end: 46 204 113;
+  /* Secondary Gradient: Deep purple elegance */
+  --oui-gradient-secondary-start: 109 40 217;
+  /* violet-600 */
+  --oui-gradient-secondary-end: 147 51 234;
+  /* purple-600 */
 
-  --oui-gradient-danger-start: 153 24 76;
-  --oui-gradient-danger-end: 237 91 134;
+  /* Success Gradient: Emerald shine */
+  --oui-gradient-success-start: 5 150 105;
+  /* emerald-600 */
+  --oui-gradient-success-end: 16 185 129;
+  /* emerald-500 */
 
-  --oui-gradient-brand-start: 173 255 47;
-  --oui-gradient-brand-end: 87 146 255;
+  /* Danger Gradient: Rose elegance */
+  --oui-gradient-danger-start: 225 29 72;
+  /* rose-600 */
+  --oui-gradient-danger-end: 239 68 68;
+  /* rose-500 */
+
+  /* Brand Gradient: Elegant cyan to violet */
+  --oui-gradient-brand-start: 56 189 248;
+  /* sky-400 */
+  --oui-gradient-brand-end: 147 51 234;
+  /* purple-600 */
   --oui-gradient-brand-stop-start: 6.62%;
   --oui-gradient-brand-stop-end: 86.5%;
-  --oui-gradient-brand-angle: 17.44deg;
+  --oui-gradient-brand-angle: 135deg;
+  /* elegant diagonal */
 
-  --oui-gradient-warning-start: 152 58 8;
-  --oui-gradient-warning-end: 245 158 66;
+  /* Warning Gradient: Amber glow */
+  --oui-gradient-warning-start: 217 119 6;
+  /* amber-600 */
+  --oui-gradient-warning-end: 245 158 11;
+  /* amber-500 */
 
-  --oui-gradient-neutral-start: 27 29 24;
-  --oui-gradient-neutral-end: 38 41 46;
+  /* Neutral Gradient: Refined slate */
+  --oui-gradient-neutral-start: 30 41 59;
+  /* slate-800 */
+  --oui-gradient-neutral-end: 51 65 85;
+  /* slate-700 */
 
-  /* rounded */
-  --oui-rounded-sm: 2px;
-  --oui-rounded: 4px;
-  --oui-rounded-md: 6px;
-  --oui-rounded-lg: 8px;
-  --oui-rounded-xl: 12px;
-  --oui-rounded-2xl: 16px;
+  /* ========================================
+     ELEGANT BORDER RADIUS
+     Subtle, refined curves
+     ======================================== */
+  --oui-rounded-sm: 3px;
+  --oui-rounded: 6px;
+  --oui-rounded-md: 8px;
+  --oui-rounded-lg: 10px;
+  --oui-rounded-xl: 14px;
+  --oui-rounded-2xl: 18px;
   --oui-rounded-full: 9999px;
 
-  /* spacing */
+  /* Spacing (unchanged) */
   --oui-spacing-xs: 20rem;
   --oui-spacing-sm: 22.5rem;
   --oui-spacing-md: 26.25rem;
@@ -102,18 +173,74 @@ body {
   font-size: 16px !important;
 }
 
+/* ========================================
+   ELEGANT ENHANCEMENTS
+   Subtle depth and refinement
+   ======================================== */
+
+/* Elegant backdrop blur for modals */
+[role="dialog"] {
+  backdrop-filter: blur(8px);
+}
+
+/* Subtle elevation shadows for cards and panels */
+.oui-bg-base-9,
+.oui-rounded-xl.oui-bg-base-9 {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3),
+    0 1px 2px -1px rgb(0 0 0 / 0.3);
+}
+
+/* Enhanced button elegance */
+button:not(:disabled):hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Elegant input focus states */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: rgb(var(--oui-color-primary));
+  box-shadow: 0 0 0 3px rgb(var(--oui-color-primary) / 0.1);
+  transition: all 0.15s ease-in-out;
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--oui-color-base-9));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--oui-color-base-6));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--oui-color-base-5));
+}
+
 
 #root>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-box.oui-scaffold-topNavbar.oui-bg-base-9>header>div .oui-text-base-contrast-36 {
   color: rgb(var(--oui-color-base-foreground) / 1) !important;
 }
 
+/* Elegant primary button styling */
 .button {
-  background-color: blue !important;
+  background: linear-gradient(135deg, rgb(var(--oui-color-primary)), rgb(var(--oui-color-primary-darken))) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.button:hover {
+  box-shadow: 0 4px 12px 0 rgb(var(--oui-color-primary) / 0.3) !important;
 }
 
 /* Target all buttons within the Position history element */
 #radix-\:r6b\:-content-Position\ history button {
-  background-color: #3b82f6 !important;
+  background: linear-gradient(135deg, rgb(var(--oui-color-primary)), rgb(var(--oui-color-primary-darken))) !important;
 }
 
 .oui-scaffold-footer-powered-by {

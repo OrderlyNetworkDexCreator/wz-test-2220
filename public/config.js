@@ -29,10 +29,10 @@ window.__RUNTIME_CONFIG__ = {
   "VITE_SEO_SITE_LANGUAGE": "en",
   "VITE_SEO_SITE_LOCALE": "en_US",
   "VITE_SEO_TWITTER_HANDLE": "",
-  "VITE_SEO_THEME_COLOR": "#000000",
+  "VITE_SEO_THEME_COLOR": "#080d19",
   "VITE_SEO_KEYWORDS": "",
   "VITE_AVAILABLE_LANGUAGES": "en,he",
   "VITE_USE_CUSTOM_PNL_POSTERS": "true",
   "VITE_CUSTOM_PNL_POSTER_COUNT": "1",
-  "VITE_TRADING_VIEW_COLOR_CONFIG": "{\"upColor\":\"#3cb371\",\"downColor\":\"#ff4d4d\",\"pnlUpColor\":\"#00ff99\",\"pnlDownColor\":\"#ff3366\",\"chartBG\":\"#1b1b2f\",\"gridColor\":\"#2e2e47\",\"textColor\":\"#d8d8f0\",\"orderLineColor\":\"#f5f5f5\",\"tpLineColor\":\"#00ff99\",\"slLineColor\":\"#ff3366\"}"
+  "VITE_TRADING_VIEW_COLOR_CONFIG": "{\"upColor\":\"#10b981\",\"downColor\":\"#ef4444\",\"pnlUpColor\":\"#10b981\",\"pnlDownColor\":\"#ef4444\",\"chartBG\":\"#080d19\",\"gridColor\":\"#1e293b\",\"textColor\":\"#f8fafc\",\"orderLineColor\":\"#38bdf8\",\"tpLineColor\":\"#10b981\",\"slLineColor\":\"#ef4444\"}"
 };
