@@ -363,3 +363,7 @@ button {
   padding-left: 2rem !important;
   padding-right: 2rem !important;
 }
+
+#root>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-scaffold-container.oui-relative.oui-h-full.oui-min-w-\[1018px\]>div.oui-box.oui-size-height>div.oui-box.oui-p-2.oui-size-width.oui-flex.oui-flex-col.oui-items-stretch.oui-flex-nowrap.oui-gap-2.oui-h-\[calc\(100vh_-_48px_-_29px\)\].oui-bg-base-10.oui-justify-start>div>div>div.oui-box.oui-size-height.oui-flex.oui-flex-col.oui-items-center.oui-justify-start.oui-flex-nowrap.oui-gap-y-2.w-split-pane>div.oui-box.oui-p-3.oui-rounded-2xl.oui-bg-base-9.oui-size-width.oui-relative.oui-border.oui-border-line-12 {
+  display: none !important;
+}
