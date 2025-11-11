@@ -168,3 +168,20 @@ body {
 #radix-\:rn5\: button:hover span {
   color: rgb(var(--oui-color-base-foreground) / 0.36) !important;
 }
+
+#root>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-scaffold-container.oui-relative.oui-h-full.oui-min-w-\[1018px\]>div.oui-box.oui-box-content.oui-flex.oui-transition-all.xl\:oui-grid.oui-min-h-full.oui-flex-1>div.oui-rounded-xl.oui-bg-base-9.oui-m-3.oui-p-4.oui-border.oui-border-line>div>div.oui-box.oui-py-6>ul>li:nth-child(5) {
+  display: none !important;
+}
+
+#root>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-scaffold-container.oui-relative.oui-h-full.oui-min-w-\[1018px\]>div.oui-box.oui-box-content.oui-flex.oui-transition-all.xl\:oui-grid.oui-min-h-full.oui-flex-1>div.oui-rounded-xl.oui-bg-base-9.oui-m-3.oui-p-4.oui-border.oui-border-line>div>div.oui-box.oui-py-6>ul>li:nth-child(6) {
+  display: none !important;
+}
+
+#root>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-box.oui-scaffold-footer.oui-w-full.oui-bg-base-10.oui-fixed.oui-bottom-0.oui-z-50.oui-border-t.oui-border-line-12 {
+  display: none !important;
+}
+
+.lg\:oui-px-5 {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
