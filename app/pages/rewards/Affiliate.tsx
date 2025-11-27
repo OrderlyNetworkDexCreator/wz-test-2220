@@ -13,7 +13,7 @@ export default function RewardsAffiliate() {
         learnAffiliateUrl="https://orderly.network"
         referralLinkUrl={typeof window !== 'undefined' ? window.location.origin : "https://orderly.network"}
       >
-        <Dashboard.AffiliatePage />
+        <Dashboard.DashboardPage />
       </ReferralProvider>
     </>
   );
