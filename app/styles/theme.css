@@ -2,80 +2,89 @@
   --oui-font-family: 'Manrope', sans-serif;
   --oui-font-size-base: 16px;
 
-  /* colors */
-  --oui-color-primary: 176 132 233;
-  --oui-color-primary-light: 213 190 244;
-  --oui-color-primary-darken: 137 76 209;
+  /* 🌟 Pokemon Theme - Bright & Colorful! 🌟 */
+  /* Primary: Charmander Orange */
+  --oui-color-primary: 255 140 0;
+  --oui-color-primary-light: 255 180 50;
+  --oui-color-primary-darken: 220 100 0;
   --oui-color-primary-contrast: 255 255 255;
 
-  --oui-color-link: 189 107 237;
-  --oui-color-link-light: 217 152 250;
+  /* Links: Darker Electric Blue */
+  --oui-color-link: 30 100 220;
+  --oui-color-link-light: 51 130 255;
 
-  --oui-color-secondary: 255 255 255;
-  --oui-color-tertiary: 218 218 218;
-  --oui-color-quaternary: 218 218 218;
+  /* Secondary: Pokeball Red */
+  --oui-color-secondary: 238 48 48;
+  --oui-color-tertiary: 255 102 102;
+  --oui-color-quaternary: 255 153 153;
 
-  --oui-color-danger: 245 97 139;
-  --oui-color-danger-light: 250 167 188;
-  --oui-color-danger-darken: 237 72 122;
+  /* Danger: Charizard Orange-Red */
+  --oui-color-danger: 255 85 85;
+  --oui-color-danger-light: 255 136 136;
+  --oui-color-danger-darken: 220 50 50;
   --oui-color-danger-contrast: 255 255 255;
 
-  --oui-color-success: 41 233 169;
-  --oui-color-success-light: 101 240 194;
-  --oui-color-success-darken: 0 161 120;
-  --oui-color-success-contrast: 255 255 255;
+  /* Success: Bulbasaur Green */
+  --oui-color-success: 0 230 118;
+  --oui-color-success-light: 102 255 178;
+  --oui-color-success-darken: 255 140 0;
+  --oui-color-success-contrast: 0 0 0;
 
-  --oui-color-warning: 255 209 70;
-  --oui-color-warning-light: 255 229 133;
-  --oui-color-warning-darken: 255 152 0;
-  --oui-color-warning-contrast: 255 255 255;
+  /* Warning: Jigglypuff Pink */
+  --oui-color-warning: 255 153 204;
+  --oui-color-warning-light: 255 192 224;
+  --oui-color-warning-darken: 255 102 178;
+  --oui-color-warning-contrast: 0 0 0;
 
-  --oui-color-fill: 36 32 47;
-  --oui-color-fill-active: 40 46 58;
+  /* Fill: Dark Blue with Purple/Green touch */
+  --oui-color-fill: 20 30 50;
+  --oui-color-fill-active: 30 40 65;
 
-  --oui-color-base-1: 93 83 123;
-  --oui-color-base-2: 81 72 107;
-  --oui-color-base-3: 68 61 69;
-  --oui-color-base-4: 57 52 74;
-  --oui-color-base-5: 51 46 66;
-  --oui-color-base-6: 43 38 56;
-  --oui-color-base-7: 36 32 47;
-  --oui-color-base-8: 29 26 38;
-  --oui-color-base-9: 22 20 28;
-  --oui-color-base-10: 14 13 18;
+  /* Base Colors: Dark Night Theme */
+  --oui-color-base-1: 20 30 50;
+  --oui-color-base-2: 25 35 55;
+  --oui-color-base-3: 30 40 60;
+  --oui-color-base-4: 35 45 65;
+  --oui-color-base-5: 40 50 70;
+  --oui-color-base-6: 50 60 80;
+  --oui-color-base-7: 60 70 90;
+  --oui-color-base-8: 80 90 110;
+  --oui-color-base-9: 100 110 130;
+  --oui-color-base-10: 120 130 150;
 
   --oui-color-base-foreground: 255 255 255;
-  --oui-color-line: 255 255 255;
+  --oui-color-line: 255 140 50;
 
-  --oui-color-trading-loss: 245 97 139;
+  /* Trading: Squirtle Blue vs Charmander Orange */
+  --oui-color-trading-loss: 255 102 51;
   --oui-color-trading-loss-contrast: 255 255 255;
-  --oui-color-trading-profit: 41 233 169;
-  --oui-color-trading-profit-contrast: 255 255 255;
+  --oui-color-trading-profit: 0 204 255;
+  --oui-color-trading-profit-contrast: 0 0 0;
 
-  /* gradients */
-  --oui-gradient-primary-start: 40 0 97;
-  --oui-gradient-primary-end: 189 107 237;
+  /* Gradients: Vibrant Pokemon Inspired */
+  --oui-gradient-primary-start: 255 220 0;
+  --oui-gradient-primary-end: 255 153 0;
 
-  --oui-gradient-secondary-start: 81 42 121;
-  --oui-gradient-secondary-end: 176 132 233;
+  --oui-gradient-secondary-start: 238 48 48;
+  --oui-gradient-secondary-end: 255 102 102;
 
-  --oui-gradient-success-start: 1 83 68;
-  --oui-gradient-success-end: 41 223 169;
+  --oui-gradient-success-start: 0 230 118;
+  --oui-gradient-success-end: 102 255 178;
 
-  --oui-gradient-danger-start: 153 24 76;
-  --oui-gradient-danger-end: 245 97 139;
+  --oui-gradient-danger-start: 255 85 85;
+  --oui-gradient-danger-end: 255 153 51;
 
-  --oui-gradient-brand-start: 231 219 249;
-  --oui-gradient-brand-end: 159 107 225;
+  --oui-gradient-brand-start: 51 153 255;
+  --oui-gradient-brand-end: 153 102 255;
   --oui-gradient-brand-stop-start: 6.62%;
   --oui-gradient-brand-stop-end: 86.5%;
   --oui-gradient-brand-angle: 17.44deg;
 
-  --oui-gradient-warning-start: 152 58 8;
-  --oui-gradient-warning-end: 255 209 70;
+  --oui-gradient-warning-start: 255 153 204;
+  --oui-gradient-warning-end: 255 102 178;
 
-  --oui-gradient-neutral-start: 27 29 24;
-  --oui-gradient-neutral-end: 38 41 46;
+  --oui-gradient-neutral-start: 20 30 50;
+  --oui-gradient-neutral-end: 255 140 0;
 
   /* rounded */
   --oui-rounded-sm: 2px;
@@ -94,7 +103,12 @@
   --oui-spacing-xl: 33.75rem;
 }
 
-html, body {
+html,
+body {
   font-family: 'Manrope', sans-serif !important;
   font-size: 16px !important;
+  font-weight: 500 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgb(255, 255, 255) !important;
 }
