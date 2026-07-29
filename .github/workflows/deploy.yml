@@ -134,6 +134,7 @@ jobs:
           else
             echo "RESULT: Merge failed — upstream could not be merged cleanly. Aborting merge."
             git merge --abort 2>/dev/null || true
+            exit 1
           fi
 
       - name: Setup Node.js
